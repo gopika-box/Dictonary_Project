@@ -1,0 +1,1 @@
+export const baseurl= "https://freedictionaryapi.com/api/v1/entries/en/"
