@@ -1,16 +1,34 @@
-# React + Vite
+# Dictionary Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A clean, responsive web application that allows users to search for word definitions, parts of speech, phonetic pronunciations, and real-world example usage using a dictionary API.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Features
 
-## React Compiler
+* **Word Search:** Look up any word to fetch its real-time dictionary data.
+* **Grammatical Class:** View the part of speech (noun, verb, adjective, etc.) for searched terms.
+* **Phonetic Pronunciation:** Displays phonetic details when available.
+* **Definitions & Examples:** Lists up to 5 concise definitions and example sentences per word.
+* **Modern UI:** Styled with Tailwind CSS for a sleek, dark-themed user interface.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* **Frontend:** [React.js](https://react.dev/)
+* **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+* **HTTP Client:** [Axios](https://axios-http.com/)
+
+---
+
+## 📂 Project Structure
+
+```text
+src/
+├── components/
+│   └── Dictionary.jsx
+├── constants/
+│   └── constants.js
+├── App.jsx
+└── main.jsx

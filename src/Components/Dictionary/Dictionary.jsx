@@ -36,11 +36,11 @@ export const Dictionary = () => {
           <h4 className="text-[#61B2A6] font-extrabold ">WORD</h4>
           <h2 className="text-2xl font-bold text-white">{data.word}</h2>
         </div>
-        <div>
-          {/* other language */}
+        {/* <div>
+          
           <h1 className="text-[#61B2A6] font-extrabold">other language</h1>
           <h1 className="text-white font-bold">other</h1>
-        </div>
+        </div> */}
       </div>
 
         <div className="w-full text-white">
