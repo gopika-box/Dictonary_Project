@@ -1,6 +1,7 @@
 # Dictionary Web App
 
-A clean, responsive web application that allows users to search for word definitions, parts of speech, phonetic pronunciations, and real-world example usage using a dictionary API.
+A clean, responsive web application that allows users to search for word definitions, parts of speech, phonetic pronunciations, and real-world example usage using a dictionary API.  
+Live demo: - [Demo Link](https://dictionaryproject7.netlify.app/)
 
 ---
 
