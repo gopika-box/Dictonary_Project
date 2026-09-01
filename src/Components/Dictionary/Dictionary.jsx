@@ -19,6 +19,64 @@ export const Dictionary = () => {
         })
         
     }
+
+    const handleSound = async () => {
+    if (!data.word) return;
+
+    try {
+        // Step 1: Query Wiktionary for images associated with the word
+        const wikiRes = await axios.get("https://en.wiktionary.org/w/api.php", {
+            params: {
+                action: "query",
+                titles: data.word,
+                prop: "images",
+                format: "json",
+                origin: "*", // Required to bypass CORS
+            },
+        });
+
+        const pages = wikiRes.data.query.pages;
+        const pageId = Object.keys(pages)[0];
+        const images = pages[pageId]?.images || [];
+
+        // Find an audio file (e.g., .ogg or .mp3)
+        const audioFileObj = images.find(
+            (img) => img.title.endsWith(".ogg") || img.title.endsWith(".mp3")
+        );
+
+        if (!audioFileObj) {
+            alert(`No audio file found on Wikimedia Commons for "${data.word}"`);
+            return;
+        }
+
+        // Step 2: Query Wikimedia Commons to resolve direct file URL
+        const commonsRes = await axios.get("https://commons.wikimedia.org/w/api.php", {
+            params: {
+                action: "query",
+                titles: audioFileObj.title,
+                prop: "imageinfo",
+                iiprop: "url",
+                format: "json",
+                origin: "*", 
+            },
+        });
+
+        const commonsPages = commonsRes.data.query.pages;
+        const commonsPageId = Object.keys(commonsPages)[0];
+        const audioUrl = commonsPages[commonsPageId]?.imageinfo?.[0]?.url;
+
+        if (audioUrl) {
+            const audio = new Audio(audioUrl);
+            audio.play().catch((err) => console.error("Playback error:", err));
+        } else {
+            alert("Could not resolve audio URL.");
+        }
+    } catch (error) {
+        console.error("Failed to fetch audio:", error);
+        alert("Error fetching audio file.");
+    }
+};
+   
   return (
     <div>
 
@@ -30,11 +88,11 @@ export const Dictionary = () => {
         </ul>
     </nav>
 
-    <div className="flex flex-col bg-[#3D4655] rounded p-3 mt-10 justify-center items-center max-w-md mx-auto">
+    <div className="flex flex-col bg-[#3D4655] rounded-xl p-3 mt-10 justify-center items-center max-w-md mx-auto">
       <div className="flex justify-between w-full">
         <div className="flex flex-col text-start px-1">
           <h4 className="text-[#61B2A6] font-extrabold ">WORD</h4>
-          <h2 className="text-2xl font-bold text-white">{data.word}</h2>
+          <h2 className="text-2xl font-bold text-white">{data.word} <button className="h-5 bg-black/20 hover:bg-black/50 focus:outline-2 focus:outline-offset-2 focus:outline-violet-500  cursor-pointer rounded-2xl" onClick={handleSound}><sup >🔊</sup></button> </h2>
         </div>
         {/* <div>
           
@@ -86,7 +144,6 @@ export const Dictionary = () => {
 
   return data?.entries?.map((entry) =>
     entry?.senses?.map((sense) => {
-      // Gather examples from both main sense and subsenses
       const allExamples = [
         ...(sense.examples || []),
         ...(sense.subsenses?.flatMap((sub) => sub.examples || []) || [])
